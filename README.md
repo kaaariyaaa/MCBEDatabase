@@ -29,7 +29,7 @@ GitHub からクローンして、他プロジェクトの `libs` に配置し�
 
 例:
 ```sh
-git clone https://github.com/yourname/MCBEDatabase.git libs/MCBEDatabase
+git clone https://github.com/kaaariyaaa/MCBEDatabase.git libs/MCBEDatabase
 ```
 
 このリポジトリにはビルド済みの `lib/` が含まれているため、そのまま JS から利用できます。

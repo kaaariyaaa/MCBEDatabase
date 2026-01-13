@@ -29,7 +29,7 @@ Clone this repository into your project's `libs` directory.
 
 Example:
 ```sh
-git clone https://github.com/yourname/MCBEDatabase.git libs/MCBEDatabase
+git clone https://github.com/kaaariyaaa/MCBEDatabase.git libs/MCBEDatabase
 ```
 
 This repo includes prebuilt `lib/` output, so you can use it directly from JS.
