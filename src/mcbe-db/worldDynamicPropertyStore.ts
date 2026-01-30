@@ -35,7 +35,6 @@ export class WorldDynamicPropertyJsonStore {
   readonly prefix: string;
   readonly chunkSize: number;
   readonly maxChunks: number;
-  private readonly encoder = new TextEncoder();
 
   constructor(options: WorldDynamicPropertyStoreOptions) {
     this.prefix = options.prefix;
@@ -94,7 +93,17 @@ export class WorldDynamicPropertyJsonStore {
   }
 
   private utf8ByteLength(value: string): number {
-    return this.encoder.encode(value).length;
+    let bytes = 0;
+    for (let i = 0; i < value.length; i++) {
+      const code = value.codePointAt(i)!;
+      bytes += code <= 0x7f ? 1 : code <= 0x7ff ? 2 : code <= 0xffff ? 3 : 4;
+      if (code > 0xffff) i++;
+    }
+    return bytes;
+  }
+
+  private utf8ByteLengthForCodePoint(code: number): number {
+    return code <= 0x7f ? 1 : code <= 0x7ff ? 2 : code <= 0xffff ? 3 : 4;
   }
 
   private splitByUtf8Bytes(value: string, maxBytes: number): string[] {
@@ -107,8 +116,7 @@ export class WorldDynamicPropertyJsonStore {
 
     for (let i = 0; i < value.length; i++) {
       const code = value.codePointAt(i)!;
-      const char = String.fromCodePoint(code);
-      const charBytes = this.encoder.encode(char).length;
+      const charBytes = this.utf8ByteLengthForCodePoint(code);
 
       if (usedBytes + charBytes > maxBytes) {
         if (start === i) {

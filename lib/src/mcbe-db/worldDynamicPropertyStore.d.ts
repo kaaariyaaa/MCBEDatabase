@@ -4,7 +4,7 @@ export interface WorldDynamicPropertyStoreOptions {
      * Example: "myaddon:db"
      */
     prefix: string;
-    /** Maximum chars per chunk. Keep below the engine's string dynamic property limit. */
+    /** Maximum UTF-8 bytes per chunk. Keep below the engine's string dynamic property limit. */
     chunkSize?: number;
     /** Maximum number of chunks to use. */
     maxChunks?: number;
@@ -17,6 +17,9 @@ export declare class WorldDynamicPropertyJsonStore {
     private metaKey;
     private chunkKey;
     private readMeta;
+    private utf8ByteLength;
+    private utf8ByteLengthForCodePoint;
+    private splitByUtf8Bytes;
     load(): string | undefined;
     save(json: string): void;
     clear(): void;
