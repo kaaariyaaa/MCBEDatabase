@@ -1,2 +1,2 @@
-export { WorldSqlDatabase } from "./src/mcbe-db/database.js";
-export type { Row, SqlValue } from "./src/mcbe-db/types.js";
+export { WorldSqlDatabase } from "./lib/database.js";
+export type { Row, SqlValue } from "./lib/types.js";
